@@ -11,22 +11,6 @@ const History = () => {
         viewTransferItemDetail,
         transformToUIHistoryController
     } = useHistoryController()
-
-    const historyItems = [{
-        "name": "Dolapo",
-        "amount": 1000,
-        "account_number": "00099988877"
-    },
-    {
-        "name": "Seun",
-        "amount": 1000,
-        "account_number": "00099988877"
-    },
-    {
-        "name": "Kuti",
-        "amount": 1000,
-        "account_number": "00099988877"
-    }]
   
     const renderSeparator = () => {
       return (
@@ -60,16 +44,16 @@ const History = () => {
         <View style={styles.toolbar}>
             <Text style={styles.toolbarTitle}> Transfer History </Text>
         </View>
-        {(historyItems.length == 0) 
+        {(transformToUIHistoryController.length == 0) 
         && 
         <View style={styles.empty}>
             <Text>No Transfer History</Text>
         </View>}
-        {(historyItems.length != 0)
+        {(transformToUIHistoryController.length != 0)
         &&
         <FlatList
             style={styles.list}
-            data={historyItems}
+            data={transformToUIHistoryController}
             renderItem={renderHistoryList}
             ItemSeparatorComponent={renderSeparator}
         />
