@@ -69,7 +69,7 @@ const Home = () => {
         animation={true}
         hideOnPress={true}
         onHide={toggleShowMessage}>
-          {message+" \n Click to dismiss"}
+          {message+"\n Click to dismiss"}
       </Toast>
       <ScrollView style={styles.scrollViewContainer}>
         <View style={styles.mainViewContainer}>
@@ -79,6 +79,7 @@ const Home = () => {
             </Text>
             <View style={styles.amountSection}>
               <Text style={styles.balance}>{useCurrencyFormat(balance)}</Text>
+              <Text style={styles.h5}>Balance</Text>
             </View>
           </View>
           <View style={styles.transferTextInputCard}>
@@ -146,11 +147,11 @@ const Home = () => {
                 Transaction History
               </Text>
               <View style={styles.viewAllSection}>
-                <TouchableHighlight onPress={viewAllTransferHistory}>
+                <TouchableOpacity onPress={viewAllTransferHistory}>
                   <Text>
                     View All
                   </Text>
-                </TouchableHighlight>
+                </TouchableOpacity>
                 <Image source={require('../../img/ic_baseline_chevron_right.png')}
                   resizeMode='contain'
                   
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   amountSection: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     width: '100%',
   },
   transferTextInputCard: {
@@ -293,11 +294,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginStart: 25
   },
-
+  h5: {
+    fontSize: 15,
+    color: '#fff',
+    marginStart: 25
+  },
   viewAllSection: {
     flexDirection: 'row',
     right: 12,
     position: 'absolute',
+    alignItems: 'center'
   }
 });
 

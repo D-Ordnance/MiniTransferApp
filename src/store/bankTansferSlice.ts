@@ -61,12 +61,19 @@ const bankTransferSlice = createSlice({
         })
         builder.addCase(checkAccountFieldValidity.fulfilled, (state, { payload }) => {
             state.enableTransferButton = true
-            state.accountName = payload.data.account_name
-            state.message = payload.data.message
+            if(payload.status == "success"){
+                state.accountName = payload.data.account_name
+            }else{
+                state.showMessage = true
+                state.message = payload.message
+                state.accountName = ""
+            }
         })
         builder.addCase(checkAccountFieldValidity.rejected, (state, { payload }) => {
             state.accountIsValid = false
             state.enableTransferButton = false
+            state.showMessage = true
+            state.message = "Something went wrong"
         })
 
         builder.addCase(makeTransferService.pending, (state) => {

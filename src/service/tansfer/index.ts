@@ -2,11 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios'
 import { bankAccount, makeTransferModel, retryTransferModel } from '../../transfer/types/stateTypes';
 import { log } from 'console';
+import { SECRET_KEY } from '../../util/constant';
 
 const BASE_URL = "https://api.flutterwave.com/v3"
 
 axios.defaults.baseURL = BASE_URL;
-axios.defaults.headers.common["Authorization"] = `Bearer FLWSECK_TEST-1ed5d2df8796872d703db27dc3de5617-X`
+axios.defaults.headers.common["Authorization"] = SECRET_KEY
 
 export const getBanks = createAsyncThunk('transfer/banks', async () => {
     try {        
@@ -28,7 +29,12 @@ export const checkAccountFieldValidity = createAsyncThunk('transfer/bankAccountV
         })
         return resp.data
     } catch (error) {
-        console.log("error is ", error);
+        if(error.response){
+            if(error.response.data.message !== undefined){
+                return error.response.data
+            }
+        }
+        return {"message": "Something went wrong..."}
     }
 });
 
